@@ -7,15 +7,15 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
     <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="200dp"
             android:id="@+id/textView"
             android:textSize="70sp"
             app:layout_constraintBottom_toTopOf="@+id/ButtonsTable"
             android:layout_marginBottom="100dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
+            app:layout_constraintRight_toRightOf="parent"
+            android:textDirection="rtl"/>
 
     <TableLayout
             android:id="@+id/ButtonsTable"
@@ -32,7 +32,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button7"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button7">
             </Button>
 
             <Button
@@ -41,7 +41,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button8"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button8">
 
             </Button>
 
@@ -51,7 +51,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button9"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button9">
             </Button>
 
             <Button
@@ -60,7 +60,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/ButtonDiv"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="buttonDiv">
 
             </Button>
 
@@ -70,7 +70,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/ButtonDel"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="buttonDel">
             </Button>
         </TableRow>
 
@@ -81,7 +81,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button4"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button4">
             </Button>
 
             <Button
@@ -90,7 +90,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button5"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button5">
             </Button>
 
             <Button
@@ -99,7 +99,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button6"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button6">
             </Button>
 
             <Button
@@ -108,7 +108,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/ButtonMul"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="buttonMul">
             </Button>
 
             <Button
@@ -128,7 +128,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button1"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button1">
             </Button>
             <Button
                     style="?android:attr/buttonBarButtonStyle"
@@ -136,7 +136,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button2"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button2">
             </Button>
 
             <Button
@@ -145,7 +145,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button3"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button3">
             </Button>
 
             <Button
@@ -154,7 +154,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/ButtonMinus"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="buttonMinus">
             </Button>
 
             <Button
@@ -173,7 +173,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/Button0"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="button0">
             </Button>
 
             <Button
@@ -182,7 +182,7 @@
                     android:text="@string/comma"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="buttonComma">
             </Button>
 
             <Button
@@ -200,7 +200,7 @@
                     android:text="@string/plus"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="buttonPlus">
             </Button>
 
             <Button
@@ -209,7 +209,7 @@
                     android:text="@string/equal"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:textSize="36sp">
+                    android:textSize="36sp" android:onClick="buttonEqual">
             </Button>
         </TableRow>
     </TableLayout>
