@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView symbol;
     private TextView firstNumber;
     private TextView secondNumber;
+    private boolean commaIsSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         this.secondNumber = (TextView) findViewById(R.id.secondNumber);
         this.symbol = (TextView) findViewById(R.id.operationSymbol);
         this.number = this.firstNumber;
+        commaIsSet = false;
     }
 
     public void clear()
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         number.setText("");
         secondNumber.setText("");
         symbol.setText("");
-
+        commaIsSet = false;
     }
 
     public void button0(View view) {
@@ -72,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonComma(View view) {
-        //symbol.setText(",");
+        if(!commaIsSet)
+            number.append(".");
     }
 
     public void buttonPlus(View view) {
@@ -89,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
             return;
 
         char operator = this.symbol.getText().charAt(0);
-        int n1 = Integer.parseInt(first);
-        int n2 = Integer.parseInt(second);
+        double n1 = new Double(first);
+        double n2 = new Double(second);
         //System.out.println("operator: " + operator + ", n1: " + n1 + ", n2: "+ n2);
 
         clear();
 
-        int res = n1;
+        double res = n1;
         switch (operator) {
             case '+': res = n1 + n2; break;
             case '-': res = n1 - n2; break;
@@ -103,22 +106,22 @@ public class MainActivity extends AppCompatActivity {
             case '/': res = n1 / n2; break;
         }
 
-        firstNumber.setText(Integer.toString(res));
+        firstNumber.setText(String.valueOf(res));
     }
 
     public void buttonMinus(View view) {
         symbol.setText("-");
-        number = (TextView) findViewById(R.id.secondNumber);
+        number = secondNumber;
     }
 
     public void buttonMul(View view) {
         symbol.setText("x");
-        number = (TextView) findViewById(R.id.secondNumber);
+        number = secondNumber;
     }
 
     public void buttonDiv(View view) {
         symbol.setText("/");
-        number = (TextView) findViewById(R.id.secondNumber);
+        number = secondNumber;
     }
 
     public void buttonDel(View view) {
