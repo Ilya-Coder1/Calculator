@@ -9,13 +9,26 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView number;
     private TextView symbol;
+    private TextView firstNumber;
+    private TextView secondNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.number = (TextView) findViewById(R.id.firstNumber);
+        this.firstNumber = (TextView) findViewById(R.id.firstNumber);
+        this.secondNumber = (TextView) findViewById(R.id.secondNumber);
         this.symbol = (TextView) findViewById(R.id.operationSymbol);
+        this.number = this.firstNumber;
+    }
+
+    public void clear()
+    {
+        number = firstNumber;
+        number.setText("");
+        secondNumber.setText("");
+        symbol.setText("");
+
     }
 
     public void button0(View view) {
@@ -64,10 +77,33 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonPlus(View view) {
         symbol.setText("+");
-        number = (TextView) findViewById(R.id.secondNumber);
+        number = secondNumber;
     }
 
     public void buttonEqual(View view) {
+
+        String first = firstNumber.getText().toString();
+        String second = secondNumber.getText().toString();
+
+        if (first == "" || second == "")
+            return;
+
+        char operator = this.symbol.getText().charAt(0);
+        int n1 = Integer.parseInt(first);
+        int n2 = Integer.parseInt(second);
+        //System.out.println("operator: " + operator + ", n1: " + n1 + ", n2: "+ n2);
+
+        clear();
+
+        int res = n1;
+        switch (operator) {
+            case '+': res = n1 + n2; break;
+            case '-': res = n1 - n2; break;
+            case 'x': res = n1 * n2; break;
+            case '/': res = n1 / n2; break;
+        }
+
+        firstNumber.setText(Integer.toString(res));
     }
 
     public void buttonMinus(View view) {
@@ -86,9 +122,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonDel(View view) {
-        number = (TextView)findViewById(R.id.firstNumber);
-        number.setText("");
-        ((TextView)findViewById(R.id.secondNumber)).setText("");
-        ((TextView)findViewById(R.id.operationSymbol)).setText("");
+        clear();
     }
 }
