@@ -7,79 +7,88 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textView;
+    private TextView number;
+    private TextView symbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.textView = findViewById(R.id.textView);
+        this.number = (TextView) findViewById(R.id.firstNumber);
+        this.symbol = (TextView) findViewById(R.id.operationSymbol);
     }
 
     public void button0(View view) {
-        textView.append("0");
+        number.append("0");
     }
 
     public void button1(View view) {
-        textView.append("1");
+        number.append("1");
     }
 
     public void button2(View view) {
-        textView.append("2");
+        number.append("2");
     }
 
     public void button3(View view) {
-        textView.append("3");
+        number.append("3");
     }
 
     public void button4(View view) {
-        textView.append("4");
+        number.append("4");
     }
 
     public void button5(View view) {
-        textView.append("5");
+        number.append("5");
     }
 
     public void button6(View view) {
-        textView.append("6");
+        number.append("6");
     }
 
     public void button7(View view) {
-        textView.append("7");
+        number.append("7");
     }
 
     public void button8(View view) {
-        textView.append("8");
+        number.append("8");
     }
 
     public void button9(View view) {
-        textView.append("9");
+        number.append("9");
     }
 
     public void buttonComma(View view) {
-        textView.append(",");
+        //symbol.setText(",");
     }
 
     public void buttonPlus(View view) {
-        textView.append("+");
+        symbol.setText("+");
+        number = (TextView) findViewById(R.id.secondNumber);
     }
 
     public void buttonEqual(View view) {
     }
 
     public void buttonMinus(View view) {
-        textView.append("-");
+        symbol.setText("-");
+        number = (TextView) findViewById(R.id.secondNumber);
     }
 
     public void buttonMul(View view) {
-        textView.append("x");
+        symbol.setText("x");
+        number = (TextView) findViewById(R.id.secondNumber);
     }
 
     public void buttonDiv(View view) {
-        textView.append("/");
+        symbol.setText("/");
+        number = (TextView) findViewById(R.id.secondNumber);
     }
 
     public void buttonDel(View view) {
-        textView.clearComposingText();
+        number = (TextView)findViewById(R.id.firstNumber);
+        number.setText("");
+        ((TextView)findViewById(R.id.secondNumber)).setText("");
+        ((TextView)findViewById(R.id.operationSymbol)).setText("");
     }
 }
