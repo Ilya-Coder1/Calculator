@@ -24,6 +24,45 @@ public class MainActivity extends AppCompatActivity {
         commaIsSet = false;
     }
 
+    public class Calculator {
+
+        private double number;
+        private char operator;
+        private int priority;
+        private static final int maxPriority = 1;
+
+        public Calculator() {
+            this.number = 0;
+            this.operator = ' ';
+            this.priority = 0;
+        }
+
+        public Calculator(String numberAndOperator) {
+            this.number = new Double(numberAndOperator.substring(0, numberAndOperator.length()));
+            this.operator = numberAndOperator.charAt(numberAndOperator.length() - 1);
+            if (this.operator == '+' || this.operator == '-')
+                this.priority = 0;
+            else if (this.operator == '*' || this.operator == '/')
+                this.priority = 1;
+        }
+
+        public int getPriority() { return priority; }
+
+        public double getNumber() { return number; }
+
+        public void add(Calculator n) {
+            switch (operator) {
+                case '+': this.number += n.number; break;
+                case '-': this.number -= n.number; break;
+                case '*': this.number *= n.number; break;
+                case '/': this.number /= n.number; break;
+                default: return;
+            }
+
+            this.operator = n.operator;
+        }
+    }
+
     public void clear()
     {
         number = firstNumber;
