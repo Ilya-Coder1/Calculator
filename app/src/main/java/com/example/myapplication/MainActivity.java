@@ -5,71 +5,42 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView number;
-    private TextView symbol;
-    private TextView firstNumber;
-    private TextView secondNumber;
+    private int index;
+    //private TextView symbol;
+    //private TextView firstNumber;
+    //private TextView secondNumber;
     private boolean commaIsSet;
+    private ArrayList<Calculator> numbers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.firstNumber = (TextView) findViewById(R.id.firstNumber);
-        this.secondNumber = (TextView) findViewById(R.id.secondNumber);
-        this.symbol = (TextView) findViewById(R.id.operationSymbol);
-        this.number = this.firstNumber;
+        this.number = (TextView) findViewById(R.id.number);
+        numbers = new ArrayList<Calculator>();
         commaIsSet = false;
+        index = 0;
     }
 
-    public class Calculator {
-
-        private double number;
-        private char operator;
-        private int priority;
-        private static final int maxPriority = 1;
-
-        public Calculator() {
-            this.number = 0;
-            this.operator = ' ';
-            this.priority = 0;
-        }
-
-        public Calculator(String numberAndOperator) {
-            this.number = new Double(numberAndOperator.substring(0, numberAndOperator.length()));
-            this.operator = numberAndOperator.charAt(numberAndOperator.length() - 1);
-            if (this.operator == '+' || this.operator == '-')
-                this.priority = 0;
-            else if (this.operator == '*' || this.operator == '/')
-                this.priority = 1;
-        }
-
-        public int getPriority() { return priority; }
-
-        public double getNumber() { return number; }
-
-        public void add(Calculator n) {
-            switch (operator) {
-                case '+': this.number += n.number; break;
-                case '-': this.number -= n.number; break;
-                case '*': this.number *= n.number; break;
-                case '/': this.number /= n.number; break;
-                default: return;
-            }
-
-            this.operator = n.operator;
-        }
+    String convertToString()
+    {
+        String s = this.number.getText().toString().substring(index);
+        System.out.println(s);
+        index += s.length();
+        return s;
     }
 
     public void clear()
     {
-        number = firstNumber;
         number.setText("");
-        secondNumber.setText("");
-        symbol.setText("");
         commaIsSet = false;
+        index = 0;
     }
 
     public void button0(View view) {
@@ -115,52 +86,49 @@ public class MainActivity extends AppCompatActivity {
     public void buttonComma(View view) {
         if(!commaIsSet)
             number.append(".");
+        commaIsSet = true;
     }
 
     public void buttonPlus(View view) {
-        symbol.setText("+");
-        number = secondNumber;
+        number.append("+");
+        Calculator a = new Calculator(convertToString());
+        System.out.println("Success");
+        numbers.add(a);
     }
 
     public void buttonEqual(View view) {
-
-        String first = firstNumber.getText().toString();
-        String second = secondNumber.getText().toString();
-
-        if (first == "" || second == "")
-            return;
-
-        char operator = this.symbol.getText().charAt(0);
-        double n1 = new Double(first);
-        double n2 = new Double(second);
-        //System.out.println("operator: " + operator + ", n1: " + n1 + ", n2: "+ n2);
-
-        clear();
-
-        double res = n1;
-        switch (operator) {
-            case '+': res = n1 + n2; break;
-            case '-': res = n1 - n2; break;
-            case 'x': res = n1 * n2; break;
-            case '/': res = n1 / n2; break;
+        number.append("=");
+        numbers.add(new Calculator(convertToString()));
+        System.out.println(numbers.get(0).getPriority());
+        int j;
+        for (int i = Calculator.maxPriority; i >= 0; i--) {
+            System.out.println(i);
+            j = 0;
+            while (j < numbers.size()) {
+                if(numbers.get(j).getPriority() == i)
+                    numbers.get(j).add(numbers.remove(j + 1));
+                j++;
+            }
         }
+       clear();
 
-        firstNumber.setText(String.valueOf(res));
+        number.setText(numbers.get(0).getNumber() + "");
+        numbers.clear();
     }
 
     public void buttonMinus(View view) {
-        symbol.setText("-");
-        number = secondNumber;
+        number.append("-");
+        numbers.add(new Calculator(convertToString()));
     }
 
     public void buttonMul(View view) {
-        symbol.setText("x");
-        number = secondNumber;
+        number.append("x");
+        numbers.add(new Calculator(convertToString()));
     }
 
     public void buttonDiv(View view) {
-        symbol.setText("/");
-        number = secondNumber;
+        number.append("/");
+        numbers.add(new Calculator(convertToString()));
     }
 
     public void buttonDel(View view) {
