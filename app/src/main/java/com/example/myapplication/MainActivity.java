@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     String convertToString()
     {
         String s = this.number.getText().toString().substring(index);
-        System.out.println(s);
         index += s.length();
         return s;
     }
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         number.setText("");
         commaIsSet = false;
         index = 0;
+        numbers.clear();
     }
 
     public void button0(View view) {
@@ -91,29 +91,40 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonPlus(View view) {
         number.append("+");
-        Calculator a = new Calculator(convertToString());
-        System.out.println("Success");
-        numbers.add(a);
+        numbers.add(new Calculator(convertToString()));
     }
 
     public void buttonEqual(View view) {
+        if (number.getText().length() == 0)
+            return;
         number.append("=");
         numbers.add(new Calculator(convertToString()));
-        System.out.println(numbers.get(0).getPriority());
         int j;
         for (int i = Calculator.maxPriority; i >= 0; i--) {
-            System.out.println(i);
+            System.out.println("Current Priority: " + i);
             j = 0;
-            while (j < numbers.size()) {
+            while (j < numbers.size() - 1) {
+                System.out.print("Numbers: ");
+                for (int k = 0; k < numbers.size(); k++)
+                    System.out.print(numbers.get(k).getNumber() + " " + numbers.get(k).getOperator() + ", ");
                 if(numbers.get(j).getPriority() == i)
                     numbers.get(j).add(numbers.remove(j + 1));
-                j++;
+                else
+                    j++;
+                System.out.println();
             }
         }
-       clear();
+        System.out.println("Numbers: " + numbers.get(0).getNumber() + " " + numbers.get(0).getOperator());
+        System.out.println("Result: " + numbers.get(0).getNumber() + "");
+        double result = numbers.get(0).getNumber();
+        clear();
 
-        number.setText(numbers.get(0).getNumber() + "");
-        numbers.clear();
+        if(result % 1 == 0)
+            number.setText((int) result + "");
+        else {
+            number.setText(String.format("%.2f", result));
+            commaIsSet = true;
+        }
     }
 
     public void buttonMinus(View view) {
