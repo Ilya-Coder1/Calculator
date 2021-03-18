@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         if(result % 1 == 0)
             number.setText((int) result + "");
         else {
-            number.setText(new DecimalFormat("#.##").format(result));
+            number.setText(new DecimalFormat("#.######").format(result));
             commaIsSet = true;
         }
     }
