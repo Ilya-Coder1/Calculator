@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonComma(View view) {
         if(!commaIsSet)
-            number.append(".");
+            number.append(",");
         commaIsSet = true;
     }
 
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         if(result % 1 == 0)
             number.setText((int) result + "");
         else {
-            number.setText(String.format("%.2f", result));
+            number.setText(new DecimalFormat("#.##").format(result));
             commaIsSet = true;
         }
     }

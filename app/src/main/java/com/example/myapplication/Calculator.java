@@ -14,6 +14,8 @@ public class Calculator {
     }
 
     public Calculator(String numberAndOperator) {
+        numberAndOperator =  numberAndOperator.replace(',', '.');
+        System.out.println(numberAndOperator);
         this.operand = new Double(numberAndOperator.substring(0, numberAndOperator.length() - 1));
         this.operator = numberAndOperator.charAt(numberAndOperator.length() - 1);
         if(this.operator == '+' | this.operator == '-')
